@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+a,
+a:visited {
+  @apply text-blue-600 hover:text-blue-800;
+}
