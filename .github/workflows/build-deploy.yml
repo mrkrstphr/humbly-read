@@ -27,7 +27,6 @@ jobs:
         run: |
           npm ci
           npm run build
-          mv build/client/humbly-read/* build/client/
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
