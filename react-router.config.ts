@@ -1,7 +1,7 @@
 import type { Config } from "@react-router/dev/config";
 
 export default {
-  basename: "/humbly-read/",
+  basename: "/humbly-read",
   async prerender() {
     return ["/"];
   },
