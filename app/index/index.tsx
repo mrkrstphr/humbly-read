@@ -8,7 +8,7 @@ export function IndexPage() {
   const [percentCompleted, setPercentCompleted] = useState(0);
 
   useEffect(() => {
-    fetch("/comics.json")
+    fetch("comics.json")
       .then((res) => res.json())
       .then((data: Bundles) => {
         setBundles(data);

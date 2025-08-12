@@ -4,6 +4,13 @@ import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+  plugins: [
+    tailwindcss(),
+    reactRouter({
+      ssr: false,
+      basename: "/humbly-read",
+    }),
+    tsconfigPaths(),
+  ],
   base: "/humbly-read/",
 });
