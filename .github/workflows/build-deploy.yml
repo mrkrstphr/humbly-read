@@ -27,13 +27,13 @@ jobs:
         run: |
           npm ci
           npm run build
-          mv build/client/humbly-read/* build/client/
+          cp -r public/comics.json dist/
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'build/client'
+          path: 'dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

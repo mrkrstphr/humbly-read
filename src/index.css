@@ -1,0 +1,38 @@
+@import 'tailwindcss';
+
+html,
+body {
+  @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans antialiased;
+}
+
+a,
+a:visited {
+  @apply text-blue-600 hover:text-blue-800 transition-colors duration-200;
+}
+
+.dark a,
+.dark a:visited {
+  @apply text-blue-400 hover:text-blue-300;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-500;
+}
+
+/* Smooth focus styles */
+*:focus {
+  @apply outline-none ring-2 ring-blue-500/50;
+}
