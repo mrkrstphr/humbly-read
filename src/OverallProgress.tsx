@@ -1,10 +1,11 @@
 import type { Bundles } from './types';
-import { calculateCollectionLine, colorByPercent } from './utils';
+import { EXCLUDED_STATUSES, calculateCollectionLine, colorByPercent } from './utils';
 
 export function OverallProgress({ bundles }: { bundles: Bundles }) {
   const fullList = Object.values(bundles)
     .map((bundle) => Object.values(bundle))
-    .flat();
+    .flat()
+    .filter((item) => !EXCLUDED_STATUSES.includes(item));
 
   const totalItems = fullList.length;
   const unreadItems = fullList.filter((item) => item === 'unread').length;

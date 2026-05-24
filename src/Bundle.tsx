@@ -3,6 +3,7 @@ import { FaCircleCheck, FaCircleXmark } from 'react-icons/fa6';
 import { FiChevronDown } from 'react-icons/fi';
 import type { Bundle } from './types';
 import {
+  EXCLUDED_STATUSES,
   calculateBundleLine,
   calculateBundlePercentCompleted,
   colorByPercent,
@@ -16,9 +17,12 @@ export type BundleProps = {
 export function Bundle({ name, bundle }: BundleProps) {
   const [isOpen, setIsOpen] = useState(false);
   const percentCompleted = calculateBundlePercentCompleted(bundle);
-  const comicCount = Object.keys(bundle).length;
-  const readCount = Object.values(bundle).filter(
-    (status) => status !== 'unread',
+  const countableStatuses = Object.values(bundle).filter(
+    (status) => !EXCLUDED_STATUSES.includes(status),
+  );
+  const comicCount = countableStatuses.length;
+  const readCount = countableStatuses.filter(
+    (status) => status === 'read',
   ).length;
 
   return (
@@ -59,7 +63,7 @@ export function Bundle({ name, bundle }: BundleProps) {
                   style={{ width: `${percentCompleted}%` }}
                 ></div>
               </div>
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300 min-w-[3rem]">
+              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300 min-w-12">
                 {Math.floor(percentCompleted)}%
               </span>
             </div>
@@ -90,13 +94,16 @@ export function Bundle({ name, bundle }: BundleProps) {
                 key={comic}
                 className="flex items-start space-x-3 p-3 rounded-lg"
               >
-                <div className="flex-shrink-0 mt-0.5">
+                <div className="shrink-0 mt-0.5">
                   {status === 'read' ? (
                     <FaCircleCheck className="w-5 h-5 text-green-500 dark:text-green-600" />
                   ) : status === 'unread' ? (
                     <div className="w-5 h-5 rounded-full bg-gray-100 dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-700"></div>
                   ) : (
-                    <FaCircleXmark className="w-5 h-5 text-red-500 dark:text-red-600" />
+                    <FaCircleXmark
+                      className="w-5 h-5 text-red-500 dark:text-red-600"
+                      title={status}
+                    />
                   )}
                 </div>
                 <span

@@ -14,8 +14,10 @@ export function contrastColorByPercent(percent: number) {
   return 'bg-purple-600 dark:bg-purple-500';
 }
 
+export const EXCLUDED_STATUSES = ['duplicate', 'not interested'];
+
 export function calculateBundleLine(bundle: Bundle) {
-  const fullList = Object.values(bundle);
+  const fullList = Object.values(bundle).filter((item) => !EXCLUDED_STATUSES.includes(item));
   if (fullList.length === 0) return '0/0';
 
   const totalItems = fullList.length;
@@ -31,7 +33,8 @@ export function formatNum(num: number) {
 export function calculateCollectionLine(comics: Bundles) {
   const fullList = Object.values(comics)
     .map((bundle) => Object.values(bundle))
-    .flat();
+    .flat()
+    .filter((item) => !EXCLUDED_STATUSES.includes(item));
 
   const totalItems = fullList.length;
   const unreadItems = fullList.filter((item) => item === 'unread').length;
@@ -40,7 +43,7 @@ export function calculateCollectionLine(comics: Bundles) {
 }
 
 export function calculateBundlePercentCompleted(bundle: Bundle) {
-  const fullList = Object.values(bundle);
+  const fullList = Object.values(bundle).filter((item) => !EXCLUDED_STATUSES.includes(item));
   if (fullList.length === 0) return 0;
 
   const totalItems = fullList.length;

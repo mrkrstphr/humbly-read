@@ -19,7 +19,7 @@ function App() {
 
   // Filter bundles based on search query
   const filteredBundles = bundles
-    ? Object.entries(bundles).filter(([bundleName, bundle]) => {
+    ? Object.entries(bundles).sort(([a], [b]) => a.localeCompare(b)).filter(([bundleName, bundle]) => {
         const query = searchQuery.toLowerCase().trim();
         if (!query) return true;
 
