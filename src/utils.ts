@@ -32,7 +32,7 @@ export function formatNum(num: number) {
 
 export function calculateCollectionLine(comics: Bundles) {
   const fullList = Object.values(comics)
-    .map((bundle) => Object.values(bundle))
+    .map((entry) => Object.values(entry.items))
     .flat()
     .filter((item) => !EXCLUDED_STATUSES.includes(item));
 

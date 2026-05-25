@@ -19,15 +19,13 @@ function App() {
 
   // Filter bundles based on search query
   const filteredBundles = bundles
-    ? Object.entries(bundles).sort(([a], [b]) => a.localeCompare(b)).filter(([bundleName, bundle]) => {
+    ? Object.entries(bundles).sort(([a], [b]) => a.localeCompare(b)).filter(([bundleName, entry]) => {
         const query = searchQuery.toLowerCase().trim();
         if (!query) return true;
 
-        // Check if bundle name matches
         if (bundleName.toLowerCase().includes(query)) return true;
 
-        // Check if any comic title matches
-        return Object.keys(bundle).some((comicTitle) =>
+        return Object.keys(entry.items).some((comicTitle) =>
           comicTitle.toLowerCase().includes(query),
         );
       })
@@ -46,8 +44,8 @@ function App() {
         <SearchBar onSearch={setSearchQuery} />
 
         <div className="space-y-6">
-          {filteredBundles.map(([key, bundle]) => (
-            <Bundle key={key} name={key} bundle={bundle} />
+          {filteredBundles.map(([key, entry]) => (
+            <Bundle key={key} name={key} bundle={entry.items} />
           ))}
           {filteredBundles.length === 0 && searchQuery && <NoResults />}
         </div>

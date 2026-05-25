@@ -3,7 +3,7 @@ import { EXCLUDED_STATUSES, calculateCollectionLine, colorByPercent } from './ut
 
 export function OverallProgress({ bundles }: { bundles: Bundles }) {
   const fullList = Object.values(bundles)
-    .map((bundle) => Object.values(bundle))
+    .map((entry) => Object.values(entry.items))
     .flat()
     .filter((item) => !EXCLUDED_STATUSES.includes(item));
 
