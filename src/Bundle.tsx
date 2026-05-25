@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaCircleCheck, FaCircleXmark } from 'react-icons/fa6';
+import { FaCircleCheck, FaCircleXmark, FaRegStar, FaStar, FaStarHalfStroke } from 'react-icons/fa6';
 import { FiChevronDown } from 'react-icons/fi';
 import type { Bundle } from './types';
 import {
@@ -8,6 +8,24 @@ import {
   calculateBundlePercentCompleted,
   colorByPercent,
 } from './utils';
+
+function StarRating({ rating }: { rating: number }) {
+  return (
+    <div className="flex items-center gap-0.5">
+      {Array.from({ length: 5 }, (_, i) => {
+        const full = i + 1 <= rating;
+        const half = !full && i < rating && rating - i >= 0.25;
+        return full ? (
+          <FaStar key={i} className="w-3 h-3 text-yellow-400 dark:text-yellow-300" />
+        ) : half ? (
+          <FaStarHalfStroke key={i} className="w-3 h-3 text-yellow-400 dark:text-yellow-300" />
+        ) : (
+          <FaRegStar key={i} className="w-3 h-3 text-gray-300 dark:text-gray-600" />
+        );
+      })}
+    </div>
+  );
+}
 
 export type BundleProps = {
   bundle: Bundle;
@@ -89,7 +107,7 @@ export function Bundle({ name, bundle }: BundleProps) {
       >
         <div className="px-6 pb-6 border-t border-gray-100 dark:border-gray-700 pt-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {Object.entries(bundle).map(([comic, { status }]) => (
+            {Object.entries(bundle).map(([comic, { status, rating }]) => (
               <div
                 key={comic}
                 className="flex items-start space-x-3 p-3 rounded-lg"
@@ -106,15 +124,18 @@ export function Bundle({ name, bundle }: BundleProps) {
                     />
                   )}
                 </div>
-                <span
-                  className={`text-sm leading-relaxed ${
-                    status === 'read'
-                      ? 'text-gray-600 dark:text-gray-400 line-through'
-                      : 'text-gray-800 dark:text-gray-200'
-                  }`}
-                >
-                  {comic}
-                </span>
+                <div className="flex flex-col gap-1 min-w-0">
+                  <span
+                    className={`text-sm leading-relaxed ${
+                      status === 'read'
+                        ? 'text-gray-600 dark:text-gray-400 line-through'
+                        : 'text-gray-800 dark:text-gray-200'
+                    }`}
+                  >
+                    {comic}
+                  </span>
+                  {rating !== null && <StarRating rating={rating} />}
+                </div>
               </div>
             ))}
           </div>
