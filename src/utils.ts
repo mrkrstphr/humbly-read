@@ -17,11 +17,11 @@ export function contrastColorByPercent(percent: number) {
 export const EXCLUDED_STATUSES = ['duplicate', 'not interested'];
 
 export function calculateBundleLine(bundle: Bundle) {
-  const fullList = Object.values(bundle).filter((item) => !EXCLUDED_STATUSES.includes(item));
+  const fullList = Object.values(bundle).filter((item) => !EXCLUDED_STATUSES.includes(item.status));
   if (fullList.length === 0) return '0/0';
 
   const totalItems = fullList.length;
-  const unreadItems = fullList.filter((item) => item === 'unread').length;
+  const unreadItems = fullList.filter((item) => item.status === 'unread').length;
 
   return `${totalItems - unreadItems}/${totalItems}`;
 }
@@ -34,20 +34,20 @@ export function calculateCollectionLine(comics: Bundles) {
   const fullList = Object.values(comics)
     .map((entry) => Object.values(entry.items))
     .flat()
-    .filter((item) => !EXCLUDED_STATUSES.includes(item));
+    .filter((item) => !EXCLUDED_STATUSES.includes(item.status));
 
   const totalItems = fullList.length;
-  const unreadItems = fullList.filter((item) => item === 'unread').length;
+  const unreadItems = fullList.filter((item) => item.status === 'unread').length;
 
   return `${formatNum(totalItems - unreadItems)} / ${formatNum(totalItems)}`;
 }
 
 export function calculateBundlePercentCompleted(bundle: Bundle) {
-  const fullList = Object.values(bundle).filter((item) => !EXCLUDED_STATUSES.includes(item));
+  const fullList = Object.values(bundle).filter((item) => !EXCLUDED_STATUSES.includes(item.status));
   if (fullList.length === 0) return 0;
 
   const totalItems = fullList.length;
-  const unreadItems = fullList.filter((item) => item === 'unread').length;
+  const unreadItems = fullList.filter((item) => item.status === 'unread').length;
 
   return ((totalItems - unreadItems) / totalItems) * 100;
 }

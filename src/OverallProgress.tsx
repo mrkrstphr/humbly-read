@@ -5,10 +5,10 @@ export function OverallProgress({ bundles }: { bundles: Bundles }) {
   const fullList = Object.values(bundles)
     .map((entry) => Object.values(entry.items))
     .flat()
-    .filter((item) => !EXCLUDED_STATUSES.includes(item));
+    .filter((item) => !EXCLUDED_STATUSES.includes(item.status));
 
   const totalItems = fullList.length;
-  const unreadItems = fullList.filter((item) => item === 'unread').length;
+  const unreadItems = fullList.filter((item) => item.status === 'unread').length;
 
   const percentCompleted = ((totalItems - unreadItems) / totalItems) * 100;
 

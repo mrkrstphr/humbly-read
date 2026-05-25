@@ -1,4 +1,8 @@
-export type Comic = 'unread' | 'read' | string;
+export type Comic = {
+  status: 'unread' | 'read' | string;
+  rating: number | null;
+  notes: string | null;
+};
 export type Bundle = Record<string, Comic>;
 export type BundleEntry = {
   purchased: string | null;

@@ -18,11 +18,11 @@ export function Bundle({ name, bundle }: BundleProps) {
   const [isOpen, setIsOpen] = useState(false);
   const percentCompleted = calculateBundlePercentCompleted(bundle);
   const countableStatuses = Object.values(bundle).filter(
-    (status) => !EXCLUDED_STATUSES.includes(status),
+    (comic) => !EXCLUDED_STATUSES.includes(comic.status),
   );
   const comicCount = countableStatuses.length;
   const readCount = countableStatuses.filter(
-    (status) => status === 'read',
+    (comic) => comic.status === 'read',
   ).length;
 
   return (
@@ -89,7 +89,7 @@ export function Bundle({ name, bundle }: BundleProps) {
       >
         <div className="px-6 pb-6 border-t border-gray-100 dark:border-gray-700 pt-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {Object.entries(bundle).map(([comic, status]) => (
+            {Object.entries(bundle).map(([comic, { status }]) => (
               <div
                 key={comic}
                 className="flex items-start space-x-3 p-3 rounded-lg"
