@@ -5910,13 +5910,13 @@
         "notes": null
       },
       "Once & Future Vol. 1": {
-        "status": "unread",
-        "rating": null,
+        "status": "read",
+        "rating": 5,
         "notes": null
       },
       "Once & Future Vol. 2": {
-        "status": "unread",
-        "rating": null,
+        "status": "read",
+        "rating": 4.5,
         "notes": null
       },
       "Origins #1": {
