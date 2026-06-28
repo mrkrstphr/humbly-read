@@ -4314,13 +4314,13 @@
         "notes": null
       },
       "Scott Pilgrim Vol. 1: Precious Little Life": {
-        "status": "unread",
-        "rating": null,
+        "status": "read",
+        "rating": 3,
         "notes": null
       },
       "Scott Pilgrim Vol. 2: Scott Pilgrim vs. the World": {
-        "status": "unread",
-        "rating": null,
+        "status": "read",
+        "rating": 3.5,
         "notes": null
       },
       "Scott Pilgrim Vol. 3: Scott Pilgrim & the Infinite Sadness": {
@@ -8124,8 +8124,8 @@
         "notes": null
       },
       "Batter Up, Charlie Brown!": {
-        "status": "unread",
-        "rating": null,
+        "status": "read",
+        "rating": 4.5,
         "notes": null
       },
       "Peanuts Vol. 1": {
